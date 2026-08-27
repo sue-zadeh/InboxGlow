@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MessageStatus {
+  NEW
+  READ
+  ARCHIVED
+}
+
+model ContactMessage {
+  id          String        @id @default(cuid())
+  name        String        @db.VarChar(80)
+  email       String        @db.VarChar(160)
+  phone       String?       @db.VarChar(40)
+  company     String?       @db.VarChar(100)
+  enquiryType String        @db.VarChar(100)
+  message     String        @db.Text
+  status      MessageStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status, createdAt])
+  @@index([email])
+}

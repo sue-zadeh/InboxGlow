@@ -1,0 +1,24 @@
+{
+  "name": "inboxglow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Animated contact form and message dashboard template",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently -n WEB,API -c cyan,magenta \"npm run dev -w @inboxglow/web\" \"npm run dev -w @inboxglow/api\"",
+    "build": "npm run build -w @inboxglow/api && npm run build -w @inboxglow/web",
+    "test": "npm run test -w @inboxglow/api && npm run test -w @inboxglow/web",
+    "lint": "npm run lint -w @inboxglow/api && npm run lint -w @inboxglow/web",
+    "format": "prettier --write .",
+    "db:generate": "npm run db:generate -w @inboxglow/api",
+    "db:migrate": "npm run db:migrate -w @inboxglow/api",
+    "db:deploy": "npm run db:deploy -w @inboxglow/api",
+    "db:studio": "npm run db:studio -w @inboxglow/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "prettier": "^3.5.3"
+  },
+  "engines": { "node": ">=20" },
+  "license": "SEE LICENSE.md"
+}
